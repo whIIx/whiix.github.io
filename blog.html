@@ -2,16 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Blog</title>
+    <title>Blog | Jiahao's Blog</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="header">
-        <h1>My Blog</h1>
-        <p>Coming soon: Read posts on optimization, research, and more!</p>
-        <div class="nav">
-            <a href="index.html">Back to Home</a>
-        </div>
+    <div class="container">
+        <nav class="navbar">
+            <span id="navbar-label" class="navbar-menu-label">blogs</span>
+            <a href="index.html" class="nav-link nav-link-underline">home</a>
+        </nav>
+        <div class="navbar-divider"></div>
+        <main class="main-content blog-centered">
+            <div id="blog-list" class="blog-list"></div>
+            <div id="blog-detail" class="blog-detail" style="display:none;"></div>
+        </main>
     </div>
+    <script>
+    // Configure marked options
+    marked.use({
+      breaks: true,
+      gfm: true,
+      headerIds: true,
+      mangle: false
+    });
+    
+    // 工具函数：格式化日期
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      return d.toISOString().slice(0, 10);
+    }
+
+    // 渲染博客列表
+    function renderBlogList(posts) {
+      const list = document.getElementById('blog-list');
+      list.innerHTML = '';
+      posts.forEach(post => {
+        const card = document.createElement('div');
+        card.className = 'blog-card';
+        card.innerHTML = `
+          <div class="blog-card-title">
+            <a href="#${post.filename}" class="blog-title-link">${post.title}</a>
+          </div>
+          <div class="blog-card-summary">${post.summary}</div>
+          <div class="blog-card-date">${formatDate(post.date)}</div>
+        `;
+        list.appendChild(card);
+      });
+      list.style.display = '';
+      document.getElementById('blog-detail').style.display = 'none';
+      document.getElementById('navbar-label').textContent = 'blogs';
+    }
+
+    // 渲染博客详情
+    function renderBlogDetail(post, md) {
+      const detail = document.getElementById('blog-detail');
+      // Process the markdown content
+      const htmlContent = marked.parse(md);
+      
+      detail.innerHTML = `
+        <div class="blog-content">${htmlContent}</div>
+      `;
+      detail.style.display = '';
+      document.getElementById('blog-list').style.display = 'none';
+      
+      // Update the navbar label with the path
+      document.getElementById('navbar-label').innerHTML = 
+        `<a href="#" class="navbar-breadcrumb-link">blog</a> / <span>${post.title}</span>`;
+      
+      // Add click handler for breadcrumb
+      document.querySelector('.navbar-breadcrumb-link').onclick = (e) => {
+        e.preventDefault();
+        window.location.hash = '';
+      };
+    }
+
+    // 主逻辑
+    let blogPosts = [];
+    fetch('assets/blog-index.json')
+      .then(res => res.json())
+      .then(posts => {
+        blogPosts = posts;
+        function route() {
+          const hash = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+          if (!hash) {
+            renderBlogList(blogPosts);
+          } else {
+            const post = blogPosts.find(p => p.filename === hash);
+            if (!post) {
+              renderBlogList(blogPosts);
+              return;
+            }
+            fetch('assets/' + post.filename)
+              .then(res => res.text())
+              .then(md => renderBlogDetail(post, md));
+          }
+        }
+        window.addEventListener('hashchange', route);
+        route();
+      });
+    </script>
 </body>
 </html>
