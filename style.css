@@ -3,7 +3,7 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'SF Pro Display', Arial, sans-serif;
+    font-family: 'Inter', 'SF Pro Display', Arial, sans-serif;
     background: #f2f5f8;
     color: #333;
 }
@@ -191,6 +191,7 @@ html, body {
     margin-right: auto;
     max-width: 700px;
     color: #333;
+    font-family: 'Inter', 'SF Pro Display', Arial, sans-serif;
     font-size: 20px;
     line-height: 1.7;
     opacity: 0.95;
