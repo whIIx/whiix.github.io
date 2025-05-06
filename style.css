@@ -57,9 +57,8 @@ html, body {
 
 .post-metadata-container {
     position: absolute;
-    left: 0;
-    top: 16px; 
-    margin-left: 10vw;
+    right: 0;
+    top: 16px;
     display: flex;
     align-items: center;
     gap: 16px;
@@ -167,7 +166,7 @@ html, body {
 }
 
 .blog-content {
-    margin-top: 100px;
+    margin-top: 0;
     margin-left: auto;
     margin-right: auto;
     max-width: 700px;
@@ -427,6 +426,7 @@ html, body {
     margin-left: 0;
     margin-top: 0;
     align-items: center;
+    justify-content: flex-start;
 }
 
 @media (max-width: 800px) {
@@ -441,7 +441,7 @@ html, body {
         margin: 72px auto 0 auto;
     }
     .post-metadata-container {
-        margin-left: 5vw;
+        right: 4vw;
         flex-direction: row;
         gap: 8px;
         align-items: center;
@@ -479,7 +479,7 @@ html, body {
         padding: 20px 24px;
     }
     .blog-content {
-        margin-top: 70px;
+        margin-top: 0;
     }
 }
 
@@ -490,7 +490,7 @@ html, body {
     justify-content: center;
   }
   .blog-list {
-    margin-top: -120px;
+    margin-top: 48px;
     width: 64vw;
     max-width: 900px;
   }
