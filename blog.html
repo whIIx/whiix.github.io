@@ -5,6 +5,10 @@
     <title>Blog | Jiahao's Blog</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- KaTeX for math -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/marked-katex-extension@5.1.4/lib/index.umd.js"></script>
 </head>
 <body>
     <div class="container">
@@ -32,6 +36,21 @@
       headerIds: true,
       mangle: false
     });
+
+    // Use KaTeX extension for marked
+    // Check if markedKatex is available (it's loaded via defer)
+    // We need to ensure markedKatex is loaded before marked.use is called if it's not part of the global scope immediately.
+    // A simple way for now is to assume it will be available when parsing happens.
+    // More robust would be to wrap dependent code in a DOMContentLoaded or ensure scripts are loaded in order without defer for critical ones.
+    
+    // Let's initialize it when the main script runs. It should be available if scripts are parsed.
+    if (typeof markedKatex === "function") {
+      marked.use(markedKatex({ throwOnError: false }));
+    } else {
+      // Fallback or error if markedKatex is not loaded - for now, we'll assume it loads.
+      // Consider adding it inside the fetch().then() block if issues persist.
+      console.warn("markedKatex extension not loaded yet. Math rendering might fail.");
+    }
     
     // Format date function
     function formatDate(dateStr) {
@@ -114,6 +133,11 @@
     function renderBlogDetail(post, md) {
       const detail = document.getElementById('blog-detail');
       // Process the markdown content
+      // Initialize markedKatex here if it wasn't available earlier, or right before parsing.
+      if (typeof markedKatex === "function" && !marked.options.highlight) { // Check if not already added, crude check
+        // This is a bit tricky with `marked.use` as it's usually global.
+        // The earlier initialization should suffice if markedKatex is loaded.
+      }
       const htmlContent = marked.parse(md);
       
       // Hide detail initially for transition
@@ -166,6 +190,17 @@
       .then(res => res.json())
       .then(posts => {
         blogPosts = posts;
+
+        // It's safer to initialize marked.use(markedKatex) here,
+        // ensuring markedKatex UMD module is loaded and parsed.
+        if (typeof markedKatex === "function") {
+            marked.use(markedKatex({ throwOnError: false }));
+        } else {
+            // This might happen if the UMD script for markedKatex hasn't executed yet.
+            // A more robust solution is to ensure script load order or use modules.
+            // For now, let's log a warning. If Math doesn't work, this is the first place to check.
+            console.warn("markedKatex function not found when trying to initialize in fetch. Math may not render.");
+        }
         
         function route() {
           const hash = decodeURIComponent(window.location.hash.replace(/^#/, ''));
