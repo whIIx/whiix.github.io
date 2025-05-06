@@ -50,7 +50,7 @@ __Bold__
 
 ## 5. Images
 
-![Alt text](https://via.placeholder.com/150 "Optional Title")
+![Alt text](content/blog/asset/asuka.jpg "Optional Title")
 
 ---
 

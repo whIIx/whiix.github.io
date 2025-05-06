@@ -8,8 +8,6 @@
 <body>
     <div class="container">
         <nav class="navbar">
-            <div class="navbar-left">
-            </div>
             <div class="navbar-right">
                 <a href="blog.html" class="nav-link nav-link-underline">Blogs</a>
             </div>
@@ -25,44 +23,6 @@
             <p class="subtitle">This is my personal space where I share my thoughts, research, and blogs.</p>
         </main>
     </div>
-    <script>
-    const greetings = ["Hello", "Bonjour", "Aloha", "你好", "こんにちは"];
-    const typewriter = document.getElementById('typewriter');
-    const cursor = document.querySelector('.type-cursor');
-    let greetIndex = 0;
-    let charIndex = 0;
-    let typing = true;
-
-    function typeLoop() {
-        const current = greetings[greetIndex];
-        if (typing) {
-            if (charIndex < current.length) {
-                typewriter.textContent = current.slice(0, charIndex + 1);
-                charIndex++;
-                setTimeout(typeLoop, 200);
-            } else {
-                typing = false;
-                setTimeout(typeLoop, 1000);
-            }
-        } else {
-            if (charIndex > 0) {
-                typewriter.textContent = current.slice(0, charIndex - 1);
-                charIndex--;
-                setTimeout(typeLoop, 100);
-            } else {
-                typing = true;
-                greetIndex = (greetIndex + 1) % greetings.length;
-                setTimeout(typeLoop, 1000);
-            }
-        }
-    }
-
-    // 光标闪烁
-    setInterval(() => {
-        cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
-    }, 500);
-
-    typeLoop();
-    </script>
+    <script src="script/index.js" defer></script>
 </body>
 </html>

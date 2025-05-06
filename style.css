@@ -1,3 +1,4 @@
+/* General page styling */
 html, body {
     height: 100%;
     margin: 0;
@@ -7,12 +8,14 @@ html, body {
     color: #333;
 }
 
+/* Main container for layout */
 .container {
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure footer (if any) stays at bottom */
     box-sizing: border-box;
     padding: 32px 0 0 0;
     display: flex;
     flex-direction: column;
+    z-index: 10;
 }
 
 .navbar {
@@ -27,23 +30,26 @@ html, body {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    z-index: 10;
 }
 
+/* Navigation bar elements alignment */
 .navbar-left, .navbar-right {
     display: flex;
     align-items: center;
 }
 
+/* Right section of the navbar, typically for links */
 .navbar-right {
     gap: 24px;
-    margin-left: auto;
+    margin-left: auto; /* Pushes to the right */
 }
 
+/* Left section of the navbar, can be used for brand/logo */
 .navbar-left {
-    margin-right: auto;
+    margin-right: auto; /* Pushes to the left */
 }
 
+/* Decorative divider below the navbar */
 .navbar-divider {
     width: 80vw;
     height: 2px;
@@ -55,6 +61,7 @@ html, body {
     position: relative;
 }
 
+/* Container for post title and date in blog detail view */
 .post-metadata-container {
     position: absolute;
     right: 0;
@@ -64,6 +71,7 @@ html, body {
     gap: 16px;
 }
 
+/* Styling for the title of a blog post in the metadata area */
 .post-title {
     font-size: 1em;
     font-weight: 700;
@@ -74,6 +82,7 @@ html, body {
     background-clip: text;
 }
 
+/* Styling for the date of a blog post in the metadata area */
 .post-date {
     font-size: 1em;
     color: #007cf0;
@@ -81,6 +90,7 @@ html, body {
     opacity: 0.9;
 }
 
+/* General navigation link styling */
 .nav-link {
     color: #333;
     text-decoration: none;
@@ -91,21 +101,25 @@ html, body {
     position: relative;
 }
 
+/* Underline style for navigation links */
 .nav-link-underline {
     text-decoration: none;
     font-weight: 500;
 }
 
+/* Hover effect for navigation links */
 .nav-link:hover {
     color: #007cf0;
     background-color: rgba(0, 124, 240, 0.05);
 }
 
+/* Focus style for navigation links (accessibility) */
 .nav-link:focus {
     outline: none;
     box-shadow: none;
 }
 
+/* Main content area, flexible to fill space */
 .main-content {
     flex: 1;
     display: flex;
@@ -118,6 +132,7 @@ html, body {
     position: relative;
 }
 
+/* Styling for the main greeting on the homepage */
 .greeting {
     font-size: 72px;
     font-weight: 600;
@@ -129,6 +144,7 @@ html, body {
     align-self: flex-start;
 }
 
+/* Ensures the wave emoji in the greeting doesn't inherit gradient */
 .greeting .wave {
     background: none !important;
     -webkit-background-clip: initial !important;
@@ -137,12 +153,14 @@ html, body {
     color: inherit;
 }
 
+/* Wave emoji specific styling */
 .wave {
     font-size: 1.2em;
     margin-right: 10px;
     vertical-align: middle;
 }
 
+/* Subtitle text on the homepage */
 .subtitle {
     font-size: 18px;
     color: #555;
@@ -155,6 +173,7 @@ html, body {
     align-self: flex-end;
 }
 
+/* Blinking cursor for the typewriter effect */
 .type-cursor {
     display: inline-block;
     width: 0.2ch;
@@ -165,6 +184,7 @@ html, body {
     transition: opacity 0.2s;
 }
 
+/* Styling for the main content area of a blog post */
 .blog-content {
     margin-top: 0;
     margin-left: auto;
@@ -176,6 +196,7 @@ html, body {
     opacity: 0.95;
 }
 
+/* Headings within blog content */
 .blog-content h1, .blog-content h2, .blog-content h3 {
     color: #007cf0;
     margin-top: 1.5em;
@@ -183,10 +204,12 @@ html, body {
     font-weight: 700;
 }
 
+/* Paragraphs within blog content */
 .blog-content p {
     margin: 1em 0;
 }
 
+/* Inline code snippets within blog content */
 .blog-content code {
     background: rgba(0,124,240,0.1);
     padding: 0.2em 0.4em;
@@ -195,6 +218,7 @@ html, body {
     font-size: 0.9em;
 }
 
+/* Code blocks within blog content */
 .blog-content pre {
     background: rgba(0,124,240,0.06);
     padding: 1em;
@@ -204,6 +228,7 @@ html, body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* Ensure code within pre blocks is styled correctly and wraps */
 .blog-content pre code {
     background: transparent;
     padding: 0;
@@ -212,15 +237,18 @@ html, body {
     display: block;
 }
 
+/* Lists (ordered and unordered) within blog content */
 .blog-content ul, .blog-content ol {
     margin: 1em 0;
     padding-left: 2em;
 }
 
+/* List items within blog content */
 .blog-content li {
     margin: 0.5em 0;
 }
 
+/* Links within blog content */
 .blog-content a {
     color: #007cf0;
     text-decoration: underline;
@@ -229,10 +257,12 @@ html, body {
     transition: color 0.2s;
 }
 
+/* Hover effect for links within blog content */
 .blog-content a:hover {
     color: #00dfd8;
 }
 
+/* Blockquotes within blog content */
 .blog-content blockquote {
     border-left: 4px solid #007cf0;
     margin: 1.5em 0;
@@ -243,6 +273,7 @@ html, body {
     border-radius: 0 8px 8px 0;
 }
 
+/* Images within blog content */
 .blog-content img {
     max-width: 100%;
     height: auto;
@@ -252,10 +283,12 @@ html, body {
     transition: transform 0.3s;
 }
 
+/* Hover effect for images (slight zoom) */
 .blog-content img:hover {
     transform: scale(1.01);
 }
 
+/* Centered layout for blog list and detail pages */
 .blog-centered {
     display: flex;
     flex-direction: column;
@@ -267,6 +300,7 @@ html, body {
     margin-top: 120px;
 }
 
+/* Container for the list of blog cards */
 .blog-list {
     margin-top: 24px;
     max-width: 64vw;
@@ -278,6 +312,7 @@ html, body {
     justify-content: flex-start;
 }
 
+/* Individual blog card styling */
 .blog-card {
     width: 100%;
     max-width: 100%;
@@ -291,6 +326,7 @@ html, body {
     overflow: hidden;
 }
 
+/* Decorative ::before element for blog card hover effect */
 .blog-card::before {
     content: '';
     position: absolute;
@@ -303,6 +339,7 @@ html, body {
     transition: opacity 0.3s;
 }
 
+/* Hover effects for blog card: shadow, lift, and ::before element visibility */
 .blog-card:hover {
     box-shadow: 0 8px 30px 0 rgba(0,124,240,0.15);
     transform: translateY(-3px);
@@ -312,6 +349,7 @@ html, body {
     opacity: 1;
 }
 
+/* Ripple effect for card clicks */
 .ripple-effect {
     position: absolute;
     background: rgba(0, 124, 240, 0.2);
@@ -320,9 +358,10 @@ html, body {
     height: 100px;
     transform: scale(0);
     animation: ripple 0.6s linear;
-    pointer-events: none;
+    pointer-events: none; /* Ensures it doesn't interfere with clicks */
 }
 
+/* Animation for the ripple effect */
 @keyframes ripple {
     to {
         transform: scale(4);
@@ -330,11 +369,13 @@ html, body {
     }
 }
 
+/* Content wrapper within a blog card, for z-index layering if needed */
 .blog-card-content {
     position: relative;
     z-index: 1;
 }
 
+/* Title styling within a blog card */
 .blog-card-title {
     font-size: 1.5em;
     font-weight: 700;
@@ -342,12 +383,14 @@ html, body {
     margin-top: 0;
 }
 
+/* Link styling for blog titles within cards */
 .blog-title-link {
     color: #007cf0;
     text-decoration: none;
     transition: all 0.2s;
 }
 
+/* Hover effect for blog title links (gradient text) */
 .blog-title-link:hover {
     background: linear-gradient(90deg, #007cf0 0%, #00dfd8 100%);
     -webkit-background-clip: text;
@@ -355,6 +398,7 @@ html, body {
     background-clip: text;
 }
 
+/* Summary text styling within a blog card */
 .blog-card-summary {
     color: #555;
     opacity: 0.8;
@@ -363,6 +407,7 @@ html, body {
     line-height: 1.6;
 }
 
+/* Metadata section (e.g., date) within a blog card */
 .blog-card-meta {
     display: flex;
     align-items: center;
@@ -370,6 +415,7 @@ html, body {
     margin-top: 20px;
 }
 
+/* Date styling within a blog card */
 .blog-card-date {
     color: #007cf0;
     font-size: 0.9em;
@@ -379,6 +425,7 @@ html, body {
     border-radius: 20px;
 }
 
+/* Detail view for a single blog post */
 .blog-detail {
     margin-top: 20px;
     max-width: 800px;
@@ -388,6 +435,7 @@ html, body {
     padding: 0 20px;
 }
 
+/* Breadcrumbs navigation (if used, not currently implemented in HTML) */
 .blog-breadcrumbs {
     font-size: 1em;
     margin-bottom: 18px;
@@ -395,6 +443,7 @@ html, body {
     opacity: 0.8;
 }
 
+/* Styling for breadcrumb links */
 .navbar-breadcrumb-link {
     color: #007cf0;
     text-decoration: underline;
@@ -404,11 +453,13 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Hover effect for breadcrumb links */
 .navbar-breadcrumb-link:hover {
     color: #00dfd8;
     text-decoration-color: #00dfd8;
 }
 
+/* Full-screen overlay for page transitions (if implemented) */
 .page-transition-overlay {
     position: fixed;
     top: 0;
@@ -422,6 +473,7 @@ html, body {
     transition: opacity 0.3s;
 }
 
+/* Adjustments for blog-centered layout when it's the main content */
 .main-content.blog-centered {
     margin-left: 0;
     margin-top: 0;
@@ -429,6 +481,7 @@ html, body {
     justify-content: flex-start;
 }
 
+/* Responsive adjustments for smaller screens (max-width: 800px) */
 @media (max-width: 800px) {
     .navbar {
         right: 4vw;
@@ -483,9 +536,10 @@ html, body {
     }
 }
 
+/* Responsive adjustments for larger screens (min-width: 800px) */
 @media (min-width: 800px) {
   .blog-centered {
-    min-height: 60vh;
+    min-height: 60vh; /* Ensure sufficient height on larger screens */
     display: flex;
     justify-content: center;
   }
