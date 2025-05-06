@@ -3,8 +3,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: 'SF Pro Display', Arial, sans-serif;
-    background: #000;
-    color: #fff;
+    background: #f2f5f8;
+    color: #333;
 }
 
 .container {
@@ -31,7 +31,7 @@ html, body {
 }
 
 .navbar-menu-label {
-    color: #fff;
+    color: #333;
     font-size: 20px;
     opacity: 0.85;
     letter-spacing: 0.5px;
@@ -42,14 +42,14 @@ html, body {
 .navbar-divider {
     width: 80vw;
     height: 2px;
-    background: #fff;
+    background: #007cf0;
     opacity: 0.8;
     margin: 80px auto 0 auto;
     border-radius: 1px;
 }
 
 .nav-link {
-    color: #fff;
+    color: #333;
     text-decoration: none;
     padding: 2px 0;
     border-radius: 8px;
@@ -65,7 +65,7 @@ html, body {
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 2px;
-    text-decoration-color: #00dfd8;
+    text-decoration-color: #007cf0;
     padding-bottom: 0;
 }
 
@@ -90,7 +90,7 @@ html, body {
     font-size: 72px;
     font-weight: 600;
     margin: 0 0 50px 0;
-    background: linear-gradient(90deg, #00dfd8 0%, #007cf0 100%);
+    background: linear-gradient(90deg, #007cf0 0%, #00dfd8 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -113,8 +113,8 @@ html, body {
 
 .subtitle {
     font-size: 18px;
-    color: #fff;
-    opacity: 0.6;
+    color: #555;
+    opacity: 0.8;
     margin-top: 120px;
     margin-left: auto;
     margin-right: 10vw;
@@ -126,7 +126,7 @@ html, body {
 .type-cursor {
     display: inline-block;
     width: 0.2ch;
-    color: #00dfd8;
+    color: #007cf0;
     font-weight: 600;
     font-size: inherit;
     vertical-align: baseline;
@@ -138,14 +138,14 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     max-width: 700px;
-    color: #fff;
+    color: #333;
     font-size: 20px;
     line-height: 1.7;
     opacity: 0.95;
 }
 
 .blog-content h1, .blog-content h2, .blog-content h3 {
-    color: #00dfd8;
+    color: #007cf0;
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     font-weight: 700;
@@ -156,7 +156,7 @@ html, body {
 }
 
 .blog-content code {
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,124,240,0.1);
     padding: 0.2em 0.4em;
     border-radius: 3px;
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
@@ -164,7 +164,7 @@ html, body {
 }
 
 .blog-content pre {
-    background: rgba(255,255,255,0.06);
+    background: rgba(0,124,240,0.06);
     padding: 1em;
     border-radius: 8px;
     overflow-x: auto;
@@ -175,7 +175,7 @@ html, body {
     background: transparent;
     padding: 0;
     font-size: 0.9em;
-    color: #f8f8f2;
+    color: #333;
     display: block;
 }
 
@@ -189,17 +189,17 @@ html, body {
 }
 
 .blog-content a {
-    color: #00dfd8;
+    color: #007cf0;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
 }
 
 .blog-content blockquote {
-    border-left: 4px solid #00dfd8;
+    border-left: 4px solid #007cf0;
     margin: 1.5em 0;
     padding-left: 1em;
-    color: rgba(255,255,255,0.8);
+    color: #555;
     font-style: italic;
 }
 
@@ -235,16 +235,16 @@ html, body {
 .blog-card {
     width: 100%;
     max-width: 100%;
-    background: rgba(255,255,255,0.06);
+    background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.05);
     padding: 24px 28px 18px 28px;
     transition: box-shadow 0.2s, background 0.2s;
-    border: 1.5px solid rgba(0,223,216,0.08);
+    border: 1.5px solid rgba(0,124,240,0.08);
 }
 .blog-card:hover {
-    box-shadow: 0 4px 24px 0 rgba(0,223,216,0.10);
-    background: rgba(0,223,216,0.08);
+    box-shadow: 0 4px 24px 0 rgba(0,124,240,0.12);
+    background: rgba(0,124,240,0.03);
 }
 
 .blog-card-title {
@@ -254,27 +254,27 @@ html, body {
 }
 
 .blog-title-link {
-    color: #00dfd8;
+    color: #007cf0;
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 2px;
-    text-decoration-color: #00dfd8;
+    text-decoration-color: #007cf0;
     transition: color 0.2s;
 }
 .blog-title-link:hover {
-    color: #fff;
-    text-decoration-color: #fff;
+    color: #00dfd8;
+    text-decoration-color: #00dfd8;
 }
 
 .blog-card-summary {
-    color: #fff;
+    color: #555;
     opacity: 0.8;
     font-size: 1em;
     margin-bottom: 12px;
 }
 
 .blog-card-date {
-    color: #00dfd8;
+    color: #007cf0;
     font-size: 1em;
     font-weight: 600;
     margin-top: 4px;
@@ -283,18 +283,18 @@ html, body {
 .blog-detail {
     margin-top: 20px;
     max-width: 700px;
-    color: #fff;
+    color: #333;
     width: 100%;
 }
 
 .blog-breadcrumbs {
     font-size: 1em;
     margin-bottom: 18px;
-    color: #00dfd8;
+    color: #007cf0;
     opacity: 0.8;
 }
 .blog-breadcrumb-link {
-    color: #00dfd8;
+    color: #007cf0;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 2px;
@@ -304,7 +304,7 @@ html, body {
     font-size: 2em;
     font-weight: 700;
     margin-bottom: 8px;
-    color: #00dfd8;
+    color: #007cf0;
 }
 
 .main-content.blog-centered {
@@ -314,11 +314,11 @@ html, body {
 }
 
 .navbar-breadcrumb-link {
-    color: #00dfd8;
+    color: #007cf0;
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 2px;
-    text-decoration-color: #00dfd8;
+    text-decoration-color: #007cf0;
 }
 
 @media (max-width: 800px) {

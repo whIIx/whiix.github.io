@@ -1,83 +1,163 @@
-# Website Test
+# 🧪 Markdown Test Document
 
-Test different types of markdown elements. 
+## 1. Headings
 
-### Create a custom thread pool
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
 
-```java
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicInteger;
+---
 
-public class FancyThreadPoolDemo {
+## 2. Emphasis
 
-    // Custom ThreadFactory that names threads nicely
-    static class NamedThreadFactory implements ThreadFactory {
-        private final AtomicInteger threadNumber = new AtomicInteger(1);
-        private final String namePrefix;
+*Italic*  
+_Italic_  
+**Bold**  
+__Bold__  
+***Bold & Italic***  
+~~Strikethrough~~
 
-        NamedThreadFactory(String prefix) {
-            this.namePrefix = prefix + "-worker-";
-        }
+---
 
-        public Thread newThread(Runnable r) {
-            Thread t = new Thread(r, namePrefix + threadNumber.getAndIncrement());
-            t.setDaemon(false);
-            t.setPriority(Thread.NORM_PRIORITY);
-            return t;
-        }
-    }
+## 3. Lists
 
-    // Create a custom thread pool
-    public static ExecutorService createFancyThreadPool(String poolName, int coreSize, int maxSize, int queueSize) {
-        BlockingQueue<Runnable> workQueue = new ArrayBlockingQueue<>(queueSize);
-        ThreadFactory threadFactory = new NamedThreadFactory(poolName);
+### Unordered List
+- Item A
+  - Subitem A1
+    - Subitem A1a
+- Item B
 
-        // Rejection policy: log and discard
-        RejectedExecutionHandler rejectionHandler = (r, executor) -> {
-            System.err.println("Task " + r.toString() + " rejected from " + executor.toString());
-        };
+### Ordered List
+1. First
+2. Second
+   1. Subsecond
+   2. Subsecond
+3. Third
 
-        return new ThreadPoolExecutor(coreSize, maxSize, 30L, TimeUnit.SECONDS, workQueue, threadFactory, rejectionHandler);
-    }
+---
 
-    public static void main(String[] args) throws InterruptedException {
-        ExecutorService fancyPool = createFancyThreadPool("FancyPool", 4, 8, 16);
+## 4. Links
 
-        // Submit tasks using CompletableFuture for async + non-blocking style
-        for (int i = 1; i <= 20; i++) {
-            final int taskId = i;
-            CompletableFuture.runAsync(() -> {
-                String threadName = Thread.currentThread().getName();
-                System.out.println("Task #" + taskId + " started by " + threadName);
-                try {
-                    Thread.sleep((long) (Math.random() * 2000));
-                } catch (InterruptedException ignored) {}
-                System.out.println("Task #" + taskId + " completed by " + threadName);
-            }, fancyPool);
-        }
+[Inline Link](https://www.example.com)  
+[Reference Link][ref]
 
-        // Shutdown the pool gracefully after a delay
-        Thread monitor = new Thread(() -> {
-            while (!fancyPool.isTerminated()) {
-                if (fancyPool instanceof ThreadPoolExecutor tpe) {
-                    System.out.println("Monitoring -> Active: " + tpe.getActiveCount() + ", Queue: " + tpe.getQueue().size());
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ignored) {}
-            }
-        });
-        monitor.start();
+[ref]: https://www.example.com "Example Site"
 
-        fancyPool.shutdown();
-        fancyPool.awaitTermination(30, TimeUnit.SECONDS);
-        System.out.println("All tasks completed. Thread pool shut down.");
-    }
-}
+---
+
+## 5. Images
+
+![Alt text](https://via.placeholder.com/150 "Optional Title")
+
+---
+
+## 6. Code
+
+### Inline Code
+Use the `printf()` function.
+
+### Code Block (fenced)
+```python
+def hello(name):
+    print(f"Hello, {name}!")
+
+Code Block (indented)
+
+for i in range(5):
+    print(i)
 ```
+## 7. Blockquote
 
-### Euler’s totient function
+> This is a blockquote.
+> It can span multiple lines.
+
+>> This is a nested blockquote.
+>> It can also include **formatting**, like *italic* or `inline code`.
+
+> You can also include lists:
+> - Item one
+> - Item two
+
+---
+
+## 8. Horizontal Rule
+
+---
+
+___
+
+***
+
+---
+
+## 9. Tables
+
+| Name     | Age | City           |
+|----------|-----|----------------|
+| Alice    | 24  | New York       |
+| Bob      | 30  | San Francisco  |
+| **Total**|     | *2 entries*    |
+
+---
+
+## 10. Task Lists
+
+- [x] Write unit tests
+- [ ] Fix rendering bug
+- [ ] Push to GitHub
+
+---
+
+## 11. HTML in Markdown
+
+<div style="color: blue; border: 1px solid #ccc; padding: 5px;">
+  <strong>This is an HTML block inside Markdown.</strong><br>
+  It should render properly if HTML is supported.
+</div>
+
+---
+
+## 12. Escaping Characters
+
+Escape special characters like:
+
+\* asterisk  
+\_ underscore  
+\` backtick  
+\# hash  
+\\ backslash
+
+---
+
+## 13. Footnotes
+
+You can add footnotes like this.[^note]
+
+[^note]: This is the footnote content.
+
+---
+
+## 14. Math (LaTeX-style)
+
+Inline math:  
+$e^{i\pi} + 1 = 0$
+
+Block math:
 
 $$
-\phi(n) = n \prod_{\substack{p \mid n \\ p \text{ prime}}} \left(1 - \frac{1}{p} \right)
+\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}
 $$
+
+---
+
+## 15. Definition List (if supported)
+
+**Markdown**  
+: A lightweight markup language.  
+**Renderer**  
+: A program that converts markdown to HTML.
+
+---
