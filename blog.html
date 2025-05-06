@@ -9,10 +9,16 @@
 <body>
     <div class="container">
         <nav class="navbar">
-            <span id="navbar-label" class="navbar-menu-label">blogs</span>
-            <a href="index.html" class="nav-link nav-link-underline">home</a>
+            <div class="navbar-left">
+                <a href="index.html" class="nav-link nav-link-underline">Home</a>
+            </div>
+            <div class="navbar-right">
+                <a href="blog.html" class="nav-link nav-link-underline" id="blogs-link">Blogs</a>
+            </div>
         </nav>
-        <div class="navbar-divider"></div>
+        <div class="navbar-divider">
+            <div id="post-metadata" class="post-metadata-container"></div>
+        </div>
         <main class="main-content blog-centered">
             <div id="blog-list" class="blog-list"></div>
             <div id="blog-detail" class="blog-detail" style="display:none;"></div>
@@ -27,65 +33,143 @@
       mangle: false
     });
     
-    // 工具函数：格式化日期
+    // Format date function
     function formatDate(dateStr) {
       if (!dateStr) return '';
       const d = new Date(dateStr);
       return d.toISOString().slice(0, 10);
     }
 
-    // 渲染博客列表
+    // Card click animation
+    function addCardClickEffect() {
+      document.querySelectorAll('.blog-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A' || e.target.closest('a')) {
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          }
+        });
+      });
+    }
+
+    // Render blog list with animation
     function renderBlogList(posts) {
       const list = document.getElementById('blog-list');
       list.innerHTML = '';
-      posts.forEach(post => {
+      
+      // Clear metadata area
+      document.getElementById('post-metadata').innerHTML = '';
+      
+      // Create and append blog cards with staggered animation
+      posts.forEach((post, index) => {
         const card = document.createElement('div');
         card.className = 'blog-card';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = `all 0.5s ease ${index * 0.1}s`;
+        
         card.innerHTML = `
-          <div class="blog-card-title">
-            <a href="#${post.filename}" class="blog-title-link">${post.title}</a>
+          <div class="blog-card-content">
+            <h2 class="blog-card-title">
+              <a href="#${post.filename}" class="blog-title-link">${post.title}</a>
+            </h2>
+            <p class="blog-card-summary">${post.summary}</p>
+            <div class="blog-card-meta">
+              <span class="blog-card-date">${formatDate(post.date)}</span>
+            </div>
           </div>
-          <div class="blog-card-summary">${post.summary}</div>
-          <div class="blog-card-date">${formatDate(post.date)}</div>
         `;
+        
         list.appendChild(card);
+        
+        // Trigger animation after a short delay
+        setTimeout(() => {
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, 10);
       });
-      list.style.display = '';
+      
+      list.style.display = 'flex';
       document.getElementById('blog-detail').style.display = 'none';
-      document.getElementById('navbar-label').textContent = 'blogs';
+      
+      // Add click effects after rendering
+      setTimeout(addCardClickEffect, 100);
     }
 
-    // 渲染博客详情
+    // Render blog detail with animation
     function renderBlogDetail(post, md) {
       const detail = document.getElementById('blog-detail');
       // Process the markdown content
       const htmlContent = marked.parse(md);
       
+      // Hide detail initially for transition
+      detail.style.opacity = '0';
+      detail.style.transform = 'translateY(20px)';
+      
+      // Update post metadata under the divider
+      const metadataArea = document.getElementById('post-metadata');
+      metadataArea.innerHTML = `
+        <h1 class="post-title">${post.title}</h1>
+        <span class="post-date">${formatDate(post.date)}</span>
+      `;
+      
       detail.innerHTML = `
         <div class="blog-content">${htmlContent}</div>
       `;
-      detail.style.display = '';
+      
+      detail.style.display = 'block';
       document.getElementById('blog-list').style.display = 'none';
       
-      // Update the navbar label with the path
-      document.getElementById('navbar-label').innerHTML = 
-        `<a href="#" class="navbar-breadcrumb-link">blogs</a> / <span>${post.title}</span>`;
-      
-      // Add click handler for breadcrumb
-      document.querySelector('.navbar-breadcrumb-link').onclick = (e) => {
-        e.preventDefault();
-        window.location.hash = '';
-      };
+      // Trigger animation
+      setTimeout(() => {
+        detail.style.opacity = '1';
+        detail.style.transform = 'translateY(0)';
+      }, 10);
     }
 
-    // 主逻辑
+    // Main logic
     let blogPosts = [];
+    
+    // Add page transition effect
+    function addPageTransition(callback) {
+      const transitionOverlay = document.createElement('div');
+      transitionOverlay.className = 'page-transition-overlay';
+      document.body.appendChild(transitionOverlay);
+      
+      transitionOverlay.style.opacity = '1';
+      
+      setTimeout(() => {
+        callback();
+        transitionOverlay.style.opacity = '0';
+        
+        setTimeout(() => {
+          document.body.removeChild(transitionOverlay);
+        }, 500);
+      }, 300);
+    }
+    
     fetch('assets/blog-index.json')
       .then(res => res.json())
       .then(posts => {
         blogPosts = posts;
+        
         function route() {
           const hash = decodeURIComponent(window.location.hash.replace(/^#/, ''));
+          
           if (!hash) {
             renderBlogList(blogPosts);
           } else {
@@ -94,11 +178,21 @@
               renderBlogList(blogPosts);
               return;
             }
+            
             fetch('assets/' + post.filename)
               .then(res => res.text())
               .then(md => renderBlogDetail(post, md));
           }
         }
+        
+        // Add click handler for blogs link
+        document.getElementById('blogs-link').addEventListener('click', function(e) {
+          if (window.location.pathname.includes('blog.html')) {
+            e.preventDefault();
+            window.location.hash = '';
+          }
+        });
+        
         window.addEventListener('hashchange', route);
         route();
       });
